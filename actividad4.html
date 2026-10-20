@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Construir un cuestionario (5 interrogantes)-->
+  <!-- Pregunta  -->
+  <!-- 3 alternativas -->
+  <!-- Utilizar botones de desplazamiento para la navegación  -->
+  <!-- los datos que se iran mostrando deben estar en un objeto  -->
+  <h1>Cuestionario sobre Chiquito</h1>
+
+    <div id="pregunta"></div>
+    <div id="alternativas"></div>
+
+    <br>
+
+    <button click="anterior()">Anterior</button>
+    <button click="siguiente()">Siguiente</button>
+
+    <script>
+        const cuestionario = {
+            titulo: "evaluación",
+            nivel: "facil",
+            contenido: [
+                {pregunta: "¿Cuántos años tiene Chiquito?",alternativas: ["4 años", "5 años", "2 años"]},
+                {pregunta: "¿Qué color es Chiquito?",alternativas: ["beige", "negro", "marrón"]},
+                {pregunta: "¿Comida favorita?",alternativas: ["pollo", "tallarines de atún", "patitas"]},
+                {pregunta: "¿Qué le gusta hacer?",alternativas: ["jugar", "dormir", "bañarse"]},
+                {pregunta: "¿Qué hace cuando está feliz?",alternativas: ["Se echa en el piso boca arriba","Duerme","Corre"]}
+            ]
+        }
+
+        let posicion = 0;
+        
+
+
+        function mostrarPregunta() {
+            document.getElementById("pregunta").innerHTML = cuestionario.contenido[posicion].pregunta;
+
+            let opciones = "";
+
+            for (let i = 0; i < 3; i++) {
+                opciones +=
+                    '<p><input type="radio" name="respuesta" value="' +
+                    cuestionario.contenido[posicion].alternativas[i] +
+                    '"> ' +
+                    cuestionario.contenido[posicion].alternativas[i] +
+                    '</p>';
+            }
+
+            document.getElementById("alternativas").innerHTML = opciones;
+        }
+
+        function siguiente() {
+            if (posicion < cuestionario.contenido.length - 1) {
+                posicion++;
+                mostrarPregunta();
+            }
+        }
+
+        function anterior() {
+            if (posicion > 0) {
+                posicion--;
+                mostrarPregunta();
+            }
+        }
+
+        mostrarPregunta();
+    </script>
+
+</body>
+</html>
